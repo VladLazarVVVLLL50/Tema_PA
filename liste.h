@@ -19,12 +19,12 @@ struct T{
 typedef struct T Team;
 
 void add_player_at_beginning_of_team(Player **head, char *first_n, char *second_n, int p);
- 
+
 void add_player_at_end_of_team(Player **head, char *first_n, char *second_n, int p);
-    
+
 void add_team_at_beginning_of_list(Team **head, Player *member_list, int nr_members, char *name);
-    
-void display(Team *head);    
+
+void display(Team *head);
 
 
 
