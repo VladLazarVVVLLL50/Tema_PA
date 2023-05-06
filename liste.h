@@ -1,3 +1,7 @@
+#ifndef LISTE_H
+#define LISTE_H
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,6 +30,12 @@ void add_team_at_beginning_of_list(Team **head, Player *member_list, int nr_memb
 
 void display(Team *head);
 
+void free_player_list(Player **head);
+
+void free_team_list(Team **head);
 
 
+
+
+#endif // LISTE_H
 
