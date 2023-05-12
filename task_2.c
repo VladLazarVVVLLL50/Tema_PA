@@ -11,34 +11,39 @@ int reduce_number(int val){
  return power_of_2;
 }
 
-int find_score(Team *team){
- int score=0;
- while(team->list_of_members->next_player != NULL){
+float find_score(Team *team){
+ float score=0;
+ while(team->list_of_members != NULL){
     score += team->list_of_members->points;
     team->list_of_members=team->list_of_members->next_player;
  }
+
+ score /= team->number_of_members;
  return score;
 }
 
-void eliminate_teams(Team **head,int number){
+void eliminate_teams(Team **head,int number,float max_score){
 
  while(number>0){
-    Team *aux=(*head);
-    int nr=0,min_nr=999999;
-    char *name=NULL;
-    while(aux->next_team != NULL){
-        nr = find_score(aux);
 
-        if(nr>min_nr){
-          min_nr=nr;
-          name=(char*)malloc(strlen(aux->team_name)*sizeof(char));
+    Team *aux=(*head);
+    float min_nr=max_score+1;
+    char *name=NULL;
+    while(aux != NULL){
+
+       if(aux->team_score<min_nr){
+          min_nr=aux->team_score;
+          if(name != NULL)free(name);
+          name=(char*)malloc(strlen(aux->team_name)*sizeof(char)+5);
           strcpy(name,aux->team_name);
         }
         aux=aux->next_team;
+
     }
 
     eliminate_team(head,name);
     number--;
+
  }
 
 
@@ -49,11 +54,19 @@ void eliminate_teams(Team **head,int number){
 
 
 void solve_task_2(Team **list_of_teams,int *number_of_teams){
- printf("da");
+
  int new_number_of_teams=reduce_number(*number_of_teams);
  int nr_of_eliminated_teams=(*number_of_teams)- new_number_of_teams;
- eliminate_teams(list_of_teams,nr_of_eliminated_teams);
+ int max_score=0;
+ Team *aux = (*list_of_teams);
+ while(aux != NULL){
+  aux->team_score = find_score(aux);
+  if( aux->team_score > max_score) max_score = aux->team_score;
+  aux = aux->next_team;
+ }
+
+ eliminate_teams(list_of_teams,nr_of_eliminated_teams,max_score);
  *number_of_teams=new_number_of_teams;
- display(*list_of_teams);
+
 }
 

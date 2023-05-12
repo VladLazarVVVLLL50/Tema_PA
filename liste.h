@@ -16,6 +16,7 @@ typedef struct  P Player;
 
 struct T{
     int number_of_members;
+    float team_score;
     char *team_name;
     Player *list_of_members;
     struct T *next_team;

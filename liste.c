@@ -3,9 +3,10 @@
 void add_player_at_beginning_of_team(Player **head, char *first_n, char *second_n, int p){
 
     Player *newPlayer = (Player*)malloc(sizeof(Player));
-    newPlayer->firstName=(char*)malloc(strlen(first_n)*sizeof(char));
+    newPlayer->firstName=(char*)malloc(strlen(first_n)*sizeof(char)+5);
     strcpy(newPlayer->firstName,first_n);
-    newPlayer->secondName=(char*)malloc(strlen(second_n)*sizeof(char));
+    newPlayer->secondName=(char*)malloc(strlen(second_n)*sizeof(char)+5);
+
     strcpy(newPlayer->secondName,second_n);
     newPlayer->points=p;
     newPlayer->next_player=*head;
@@ -16,17 +17,17 @@ void add_player_at_end_of_team(Player **head, char *first_n, char *second_n, int
 
 
     Player *aux=*head;
-    Player *newPlayer = (Player*)malloc(sizeof(Player));
-    newPlayer->firstName=(char*)malloc(strlen(first_n)*sizeof(char));
+    Player *newPlayer = (Player*)malloc(sizeof(Player)+5);
+    newPlayer->firstName=(char*)malloc(strlen(first_n)*sizeof(char)+5);
     strcpy(newPlayer->firstName,first_n);
-    newPlayer->secondName=(char*)malloc(strlen(second_n)*sizeof(char));
+    newPlayer->secondName=(char*)malloc(strlen(second_n)*sizeof(char)+5);
     strcpy(newPlayer->secondName,second_n);
     newPlayer->points=p;
     if(*head == NULL) add_player_at_beginning_of_team(&*head,first_n,second_n,p);
     else{
-        while(aux->next_player != NULL)aux=aux->next_player;
-        aux->next_player = newPlayer;
-        newPlayer->next_player = NULL;
+         while(aux->next_player != NULL)aux=aux->next_player;
+         aux->next_player = newPlayer;
+         newPlayer->next_player = NULL;
     }
 
 }
@@ -35,7 +36,7 @@ void add_team_at_beginning_of_list(Team **head, Player *member_list, int nr_memb
 
     Team *newTeam = (Team*)malloc(sizeof(Team));
     newTeam->number_of_members = nr_members;
-    newTeam->team_name=(char*)malloc(strlen(name)*sizeof(char));
+    newTeam->team_name=(char*)malloc(strlen(name)*sizeof(char)+5);
     strcpy(newTeam->team_name,name);
     newTeam->list_of_members = member_list;
     newTeam->next_team = *head;
@@ -47,11 +48,10 @@ void display(Team *head){
 
    FILE *g1;
    g1=fopen("r.out","w");
-   if(g1 == NULL){
-    printf("eroare!");
+   if( g1 == NULL ){
+    printf("eroare");
     exit(1);
    }
-
    while(head != NULL){
     fprintf(g1,"%s\n",head->team_name);
     head=head->next_team;
@@ -74,7 +74,7 @@ void eliminate_team(Team **head , char *name){
 
  Team *prev=*head;
  while(head_copy != NULL){
-    if(!strcmp(name,head_copy->team_name)){
+    if(strcmp(name,head_copy->team_name)){
         prev = head_copy;
         head_copy = head_copy->next_team;
     }
