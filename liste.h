@@ -29,7 +29,7 @@ void add_player_at_end_of_team(Player **head, char *first_n, char *second_n, int
 
 void add_team_at_beginning_of_list(Team **head, Player *member_list, int nr_members, char *name);
 
-void display(Team *head);
+void display(Team *head, FILE *g1);
 
 void free_player_list(Player **head);
 

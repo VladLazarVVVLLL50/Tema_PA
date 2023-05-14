@@ -44,19 +44,15 @@ void add_team_at_beginning_of_list(Team **head, Player *member_list, int nr_memb
 
 }
 
-void display(Team *head){
+void display(Team *head, FILE *g1){
 
-   FILE *g1;
-   g1=fopen("r.out","w");
-   if( g1 == NULL ){
-    printf("eroare");
-    exit(1);
-   }
+
+
    while(head != NULL){
     fprintf(g1,"%s\n",head->team_name);
     head=head->next_team;
    }
-   fclose(g1);
+
 
 
 }
