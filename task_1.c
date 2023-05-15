@@ -14,6 +14,7 @@
 
     fseek(f1,offset,SEEK_SET);
     fscanf(f1,"%d",number);
+    fgetc(f1);
     fgets(t_name,100,f1);
     t_name[strlen(t_name)-1]='\0';
     (*name)=(char*)malloc(strlen(t_name)*sizeof(char)+5);

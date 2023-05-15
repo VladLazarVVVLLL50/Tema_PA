@@ -29,10 +29,11 @@ int main(){
 
  if(tasks[2] && !tasks[3])display(list_of_teams,g);
 
- solve_task_3(list_of_teams,number_of_teams,g);
+ if(tasks[3]) solve_task_3(list_of_teams,number_of_teams,g);
 
  free_team_list(&list_of_teams);
  fclose(f);
  fclose(g);
+ free(list_of_teams);
  return 0;
 }

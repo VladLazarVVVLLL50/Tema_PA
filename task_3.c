@@ -6,7 +6,7 @@ Team *find_team(Team *list, char *name)
     if(!strcmp(head->team_name,name))return head;
     head = head->next_team;
  }
-
+ return NULL;
 }
 
 void raise_score(Team *team){
@@ -39,7 +39,7 @@ void solve_task_3(Team *initial_list, int number_of_teams, FILE *g1){
     fprintf(g1,"\n--- ROUND NO:%d\n",round_number);
     Match *aux = queue_of_matches->Front;
     while(aux != NULL){
-        fprintf(g1,"%-10s - %-10s\n",aux->first_team,aux->second_team);
+        fprintf(g1,"%-33s - %33s\n",aux->first_team,aux->second_team);
         Team *team_1 = find_team(initial_list,aux->first_team);
         Team *team_2 = find_team(initial_list,aux->second_team);
         if(team_1->team_score > team_2->team_score){
@@ -56,12 +56,12 @@ void solve_task_3(Team *initial_list, int number_of_teams, FILE *g1){
         deQueue(queue_of_matches);
     }
     fprintf(g1,"\n");
-    fprintf(g1," WINNERS OF ROUND NO:%d\n",round_number);
+    fprintf(g1,"WINNERS OF ROUND NO:%d\n",round_number);
     val = stack_of_winners;
     while(val != NULL){
-     fprintf(g1,"%s - %0.2f\n",val->team_name,val->team_score);
+     fprintf(g1,"%-34s - %0.2f\n",val->team_name,val->team_score);
      if(val->next_team != NULL){
-        fprintf(g1,"%s - %0.2f\n",val->next_team->team_name,val->next_team->team_score);
+        fprintf(g1,"%-34s - %0.2f\n",val->next_team->team_name,val->next_team->team_score);
         enQueue(queue_of_matches,val->team_name,val->next_team->team_name);
         pop(&stack_of_winners);pop(&stack_of_winners);
         val = val->next_team->next_team;
